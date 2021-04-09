@@ -1,89 +1,116 @@
-# Interview Assignment (v2.0.1)
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li><a href="#additional-libraries">Additional Libraries</a></li>
+    <li>
+      <a href="#additional-setup">Additional Setup</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#apis">API end point</a></li>
+    3<li><a href="#assumptions">Assumption and Outstanding Issues</a></li>
+  </ol>
+</details>
+<br/>
+<!-- About Project -->
 
-This package contains the base code for the interview assignment.<br>
-You can add additional library that will aid you in fulfiling the requirements.
-<br>
-<br>
-Please read through NodeJS_Assessment.pdf carefully before you attempt.
+# About The Project
 
-__Please do put include Ufinity name in your repository name or README.md__
+This is a challenge to design and develop the backend API for a school in order for school administrators and teacher to perform various administrative functions.
+
+<br/>
+
+## Additional libraries
+
+---
+
+> [Supertest](https://www.npmjs.com/package/supertest)
+
+> [ts-jest](https://www.npmjs.com/search?q=ts-jest)
+
+> [cross-env](https://www.npmjs.com/package/cross-env)
+
+<br/>
+
+## Additional Setup
+
+---
+
+Change of test script to the following to enable watchmode and setting test environment when running npm run test
+
+```sh
+"test": "cross-env NODE_ENV=test jest --watchAll --runInBand --detectOpenHandles"
+```
+
+<br/>
 
 ## Prerequisites
-- NodeJS v12.x.x
-- Docker
 
-<br>
+---
 
-## Package Structure
-| S/N | Name | Type | Description |
-|-----|------|------|-------------|
-| 1 | typescript | dir | This holds the base code which you should extend in order to fulfil the requirements |
-| 2 | NodeJS_Assessment.pdf | file | The specification for the assignment |
-| 3 | README.md | file | This file |
-| 4 | school-administration-system.postman_collection.json | file | Postman script for uploading file |
+- Node Version: v14.16.0
+- mySQL 8.0
 
-<br>
+<br/>
 
-## Exposed Port
-| S/N | Application | Exposed Port |
-|-----|-------------|--------------|
-| 1 | database | 33306 |
-| 2 | applicaiton | 3000 |
+## Installation
 
-<br>
+---
 
-## Commands
-All the commands listed should be ran in ./typescript directory.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Start
+   ```sh
+   npm run start
+   ```
 
-### Installing dependencies
-```bash
-npm install
-```
+## APIs
 
-<br>
+---
 
-### Starting Project
-Starting the project in local environment.
-This will start all the dependencies services i.e. database.
-```bash
-npm start
-```
+### Create classes
 
-<br>
+- **URL** `/api/register`
 
-### Running in watch mode
-This will start the application in watch mode.
-```bash
-npm run start:dev
-```
+- **Method**: `GET`
 
-<br>
+- **Sample Call**
+  ```sh
+  {
+    “teacher”: {
+      name: “Teacher 1”,
+      email: “teacher1@gmail.com”
+    },
+    “students”: [{
+        name: “Student 1”,
+        email: “student1@gmail.com”
+      }, {
+        name: “Student 2”,
+        email: “student2@gmail.com”
+      }],
+    “subject”: {
+      subjectCode: “ENG”,
+      name: “English”
+      },
+    “class”: {
+      classCode: “P1-1”,
+      name: “P1 Integrity”
+    }
+  }
+  ```
+  **Expected Response**
 
-### Check local application is started
-You should be able to call (GET) the following endpoint and get a 200 response
+Success: `204`
 
-```
-http://localhost:3000/api/healthcheck
-```
-
-<br>
-
-## Extras
-
-### Database
-You can place your database migration scripts in typescript/database folder. <br>
-It will be ran the first time MySQL docker container is first initialised. <br><br>
-Please provide the instruction on how to initialise the database if you are not using the above method.
-
-<br>
-
-## FAQ
-
-### Error when starting up
-If you encounter the following error when running ```npm start```, it is due to the slow startup of your database container.<br>
-Please run ```npm start``` again.
-
-```
-[server.js]	ERROR	SequelizeConnectionError: Connection lost: The server closed the connection.
-[server.js]	ERROR	Unable to start application
-```
+Error: `400 or 500`
