@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: school-administration-system-mysql
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: school-administration-system
+    ports:
+      - "33306:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d:ro

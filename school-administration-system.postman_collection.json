@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "ba397eb1-db3d-4e2c-91f4-174b4e0ce7f5",
+		"name": "school-administration-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Healtcheck",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "data",
+							"contentType": "multipart/form-data",
+							"type": "file",
+							"src": []
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/healthcheck",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"healthcheck"
+					]
+				},
+				"description": "Healthcheck for application"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
