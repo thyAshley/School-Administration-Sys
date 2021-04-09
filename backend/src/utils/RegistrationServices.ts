@@ -79,9 +79,14 @@ export const findOrCreateTeacher = async (
           "You can only assign 2 teacher teaching the same subject to a class"
         );
       }
+
+      const teacherList: { [email: string]: boolean } = {};
       teacher.forEach(async (teach) => {
-        const [tempTeacher] = await Teachers.upsert(teach);
-        await storedClasses.addTeachers(tempTeacher);
+        if (!(teach.email in teacherList)) {
+          teacherList[teach.email] = true;
+          const [tempTeacher] = await Teachers.upsert(teach);
+          await storedClasses.addTeachers(tempTeacher);
+        }
       });
     } else {
       [result] = await Teachers.upsert(teacher);
