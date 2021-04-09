@@ -1,17 +1,22 @@
-import Express from 'express';
-import compression from 'compression';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import router from './router';
-import globalErrorHandler from './config/globalErrorHandler';
+import express from "express";
+import compression from "compression";
+import cors from "cors";
+import router from "./routers/router";
+import globalErrorHandler from "./config/globalErrorHandler";
+import sequelize from "./config/database";
 
-const App = Express();
+const app = express();
 
-App.use(compression());
-App.use(cors());
-App.use(bodyParser.json());
-App.use(bodyParser.urlencoded( { extended: true } ));
-App.use('/api', router);
-App.use(globalErrorHandler);
+//used by test only
+if (process.env.NODE_ENV === "test") {
+  sequelize.sync();
+}
 
-export default App;
+app.use(compression());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/api", router);
+app.use(globalErrorHandler);
+
+export default app;

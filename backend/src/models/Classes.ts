@@ -24,7 +24,7 @@ class Classes extends Model {
   public id: number;
   public name: string;
   public classCode: string;
-  public subjectId: number;
+  public SubjectId: number;
 
   public getTeachers: HasManyGetAssociationsMixin<Teachers>;
   public addTeachers: HasManyAddAssociationMixin<Teachers, Teachers>;
