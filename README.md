@@ -66,7 +66,7 @@ Expected Output
 - Node Version: v14.16.0
 - mySQL 8.0 or docker installed
 
-if you do not have docker or plan to run the setup on a local mysql database by removing the following from package.json and updating the .env file with the correct port number and details
+if you do not have docker or plan to run the setup on a local/hosted mysql database you can do so by removing the following from package.json and updating the .env file with the correct port number and details
 
 ```
 "start:services": "docker-compose up -d",
@@ -181,3 +181,52 @@ if you do not have docker or plan to run the setup on a local mysql database by 
 ---
 
 ## Assumptions
+
+### Register API
+
+1. I assume that classes and subject combination will be the unique identifier
+   to find if i am registrating a new class or updating an existing class as
+   each class can have multiple subject and it is difficult to differentiate if i am
+   updating / creating a subject + class combination.
+
+2. Given 1) i will remove all teacher and student that were attached to the class
+   previously and insert new student and teacher to the class.
+
+3. After removing the teacher/student from the class, we still keep them in the
+   database
+
+4. I have made both the teacher and student an optional array
+   teacher: Teacher[] | Teacher and student: Student[] | Student
+
+### Report Generation API
+
+For the report generation api, looking at the requirement, there will likely be an issue when the teacher has the same name.
+
+1. we will just use the name as an unique identifier for now in order to match the test cases given. To make the result more uniquely identifible, we can always include the user of the teacher email with the name
+
+---
+
+## Known Issues
+
+1.  Report generation API is not optimize
+
+    I am still trying to figure out a way to perform a groupby and count operation with sequelize.
+
+2.  Bulkcreate does not return the id of the object
+
+    This issue makes it difficult for us to associate the object with another object. For this, i am iterating through
+
+    This issue was reported but i have tried the given method but to no avail.
+    https://github.com/sequelize/sequelize/issues/2908
+
+3.  Unable to use transaction committing with unit testing.
+
+    The design of the register api communicates with 4 different model to make sure that it is valid class and register all the necessary detail.
+
+    Initially i used a transaction commit/rollback to rollback whenever there is an issue midway through. This however did not work well with the unit test i wrote as the transaction will never be committed if a single function run true.
+
+    Likely there is a better way to do this that i have not thought of yet.
+
+4.  Upsert seems to not return object with id
+
+    This seems to be similar to (2), currently the work round here is to do a upsert to insert the data and refetch the data from the database.

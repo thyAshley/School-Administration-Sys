@@ -2,18 +2,18 @@ import { NextFunction, Request, Response } from "express";
 import ErrorBase from "../errors/ErrorBase";
 import Logger from "../config/logger";
 import { getTeacherWorkLoadRecords } from "../utils/ReportServices";
-import { Classes } from "../models";
-const LOG = new Logger("ReportServices.ts");
-// Sorry, can't work out how to do a group by and count in sequelize, so i create it by looping through the return item
 
-// unable to use performance.now() as it is not availble in node
+const LOG = new Logger("ReportServices.ts");
+
+/*
+we will just use the name as an unique identifier for now in order to match the test cases given.
+To make the result more uniquely identifible, we can always include the user of the teacher email with the name
+*/
 export const getReport = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  // we need to find unique identifier instead of name, add email to name?
-  // using any type (to find out how to use typescript with combination models)
+): Promise<void> => {
   try {
     LOG.info("Generating workload report...");
     const t1 = new Date().getTime();
