@@ -9,7 +9,6 @@ import {
 } from "../utils/RegistrationServices";
 
 import Logger from "../config/logger";
-import sequelize from "../config/database";
 
 const LOG = new Logger("RegistrationRoutes.ts");
 /*
@@ -40,8 +39,14 @@ it still did not work for me.
 jest testing. May have to mock the transaction? I am removing this currently
 until i find a better way to perform transaction.
 
+3) Upsert seems to not return object with id
+
 Solution 1: I iterate the array of teacher and student instead of using bulkinsert
 but this will likely hurt the performance due to multiple call being done to the db
+
+solution 3: I refetch the object after using upsert to save it to the db but found issue
+could be due to jest running in parallel instead of sequential. i will keep the refetching solution
+for now.
 */
 
 export const RegistrationController = async (
@@ -52,11 +57,11 @@ export const RegistrationController = async (
   const { teacher, students, subject, class: classes } = <IBody>req.body;
   try {
     const storedSubject = await findOrCreateSubject(subject);
+
     const storedClasses = await findOrCreateClass(classes, storedSubject);
 
     await findOrCreateTeacher(teacher, storedClasses);
     await findOrCreateStudents(students, storedClasses);
-
     LOG.info("Class registered");
     return res.status(204).send();
   } catch (err) {

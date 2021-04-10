@@ -1,3 +1,4 @@
+import { ISubject } from "modelTypes";
 import { DataTypes, HasManyAddAssociationMixin, Model } from "sequelize";
 
 import sequelize from "../config/database";
@@ -14,6 +15,10 @@ class Teachers extends Model {
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // typing for report only not sure if it is the correct way in sequelize
+  public readonly Classes: Teachers[];
+  public readonly Subject: ISubject;
 }
 
 Teachers.init(

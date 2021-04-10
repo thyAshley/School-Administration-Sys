@@ -2,7 +2,7 @@ import request from "supertest";
 
 import app from "../../app";
 import { data } from "../TestConstant";
-import { Classes, Students, Subjects, Teachers } from "../../models";
+import { Students, Subjects, Teachers } from "../../models";
 import { cleanUpMockData } from "../TestServices";
 
 // i use any for input type without type safety as we have many combination of typing (error should already be caught by error middleware)
@@ -12,6 +12,10 @@ function register(input: any) {
 
 describe("Test Registration API", () => {
   beforeAll(async () => {
+    await cleanUpMockData("multi");
+    await cleanUpMockData("single");
+  });
+  afterAll(async () => {
     await cleanUpMockData("multi");
     await cleanUpMockData("single");
   });

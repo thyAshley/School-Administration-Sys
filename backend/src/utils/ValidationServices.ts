@@ -116,7 +116,7 @@ export function validateSubject(subject: ISubject): void {
 export function validateClass(classes: IClass): void {
   if (typeof classes !== "object") {
     throwError(
-      "Please validate your input for the classes field",
+      "Please validate your input for the class field",
       BAD_REQUEST,
       400
     );
@@ -125,7 +125,7 @@ export function validateClass(classes: IClass): void {
   const trimSubjectCode = classes?.classCode?.trim();
   if (!trimName || !trimSubjectCode) {
     throwError(
-      "Please validate your input for the classes field",
+      "Please validate your input for the class field",
       BAD_REQUEST,
       400
     );

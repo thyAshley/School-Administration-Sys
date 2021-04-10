@@ -29,23 +29,33 @@ This is a challenge to design and develop the backend API for a school in order 
 
 ---
 
-> [Supertest](https://www.npmjs.com/package/supertest)
+- [Supertest](https://www.npmjs.com/package/supertest)
 
-> [ts-jest](https://www.npmjs.com/search?q=ts-jest)
+- [ts-jest](https://www.npmjs.com/search?q=ts-jest)
 
-> [cross-env](https://www.npmjs.com/package/cross-env)
+- [cross-env](https://www.npmjs.com/package/cross-env)
 
 <br/>
 
-## Additional Setup
+## Additional Setup for testing
 
 ---
 
-Change of test script to the following to enable watchmode and setting test environment when running npm run test
+Set up a test database in mySQL call test. This will be use to run our test cases. You can ignore this step if you do not plan to run the test cases
+
+<p align="center">
+  <img  src="images/database.PNG">
+</p>
+
+Test Runner
 
 ```sh
-"test": "cross-env NODE_ENV=test jest --watchAll --runInBand --detectOpenHandles"
+npm run test
 ```
+
+Expected Output
+
+![test cases](images/testcases.PNG)
 
 <br/>
 
@@ -54,7 +64,13 @@ Change of test script to the following to enable watchmode and setting test envi
 ---
 
 - Node Version: v14.16.0
-- mySQL 8.0
+- mySQL 8.0 or docker installed
+
+if you do not have docker or plan to run the setup on a local mysql database by removing the following from package.json and updating the .env file with the correct port number and details
+
+```
+"start:services": "docker-compose up -d",
+```
 
 <br/>
 
@@ -71,9 +87,14 @@ Change of test script to the following to enable watchmode and setting test envi
    npm install
    ```
 3. Start
+
    ```sh
    npm run start
    ```
+
+4. If you are running the code the first time, please uncomment this line of code to sync the database for the first time in app.ts
+
+![syncdatabase](images/initialSetup.PNG)
 
 ## APIs
 
@@ -83,9 +104,10 @@ Change of test script to the following to enable watchmode and setting test envi
 
 - **URL** `/api/register`
 
-- **Method**: `GET`
+- **Method**: `POST`
 
 - **Sample Call**
+
   ```sh
   {
     “teacher”: {
@@ -109,8 +131,25 @@ Change of test script to the following to enable watchmode and setting test envi
     }
   }
   ```
+
   **Expected Response**
 
-Success: `204`
+  Success: `204`
 
-Error: `400 or 500`
+  Error: `400 or 500`
+
+---
+
+### Generate workload report
+
+- **URL** `/api/reports/workload`
+
+- **Method**: `GET`
+
+- **Sample Response**
+
+  ![report](images/reportSampleResponse.PNG)
+
+  Success: `204`
+
+  Error: `400 or 500`

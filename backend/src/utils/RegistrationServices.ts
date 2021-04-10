@@ -84,13 +84,19 @@ export const findOrCreateTeacher = async (
       teacher.forEach(async (teach) => {
         if (!(teach.email in teacherList)) {
           teacherList[teach.email] = true;
-          const [tempTeacher] = await Teachers.upsert(teach);
-          await storedClasses.addTeachers(tempTeacher);
+          await Teachers.upsert(teach);
+          const teacherInDB = await Teachers.findOne({
+            where: { email: teach.email },
+          });
+          await storedClasses.addTeachers(teacherInDB);
         }
       });
     } else {
-      [result] = await Teachers.upsert(teacher);
-      await storedClasses.addTeachers(result);
+      await Teachers.upsert(teacher);
+      const teacherInDB = await Teachers.findOne({
+        where: { email: teacher.email },
+      });
+      await storedClasses.addTeachers(teacherInDB);
     }
   } catch (error) {
     throw new ErrorBase(error.message, 400, 400);
@@ -108,16 +114,26 @@ export const findOrCreateStudents = async (
     }
 
     if (Array.isArray(students)) {
-      students.forEach(async (stud) => {
-        const [tempStudent] = await Students.upsert(stud);
-        await storedClasses.addStudents(tempStudent);
-      });
+      const studentList: { [email: string]: boolean } = {};
+      for (const stud of students) {
+        if (!(stud.email in studentList)) {
+          studentList[stud.email] = true;
+          await Students.upsert(stud);
+          const studentInDb = await Students.findOne({
+            where: { email: stud.email },
+          });
+          await storedClasses.addStudents(studentInDb);
+        }
+      }
     } else {
-      const [student] = await Students.upsert(students);
-      await storedClasses.addStudents(student);
+      await Students.upsert(students);
+      const studentInDb = await Students.findOne({
+        where: { email: students.email },
+      });
+      await storedClasses.addStudents(studentInDb);
     }
-    return null;
   } catch (error) {
+    // console.log("fail");
     throw new ErrorBase(error.message, 400, 400);
   }
 };

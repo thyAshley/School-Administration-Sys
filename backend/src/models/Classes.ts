@@ -1,3 +1,4 @@
+import { ISubject } from "modelTypes";
 import {
   DataTypes,
   HasManyAddAssociationMixin,

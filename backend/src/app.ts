@@ -9,8 +9,11 @@ const app = express();
 
 //used by test only
 if (process.env.NODE_ENV === "test") {
-  sequelize.sync();
+  sequelize.sync({ alter: true });
 }
+
+// uncomment the following code to sync the database for the first time
+// sequelize.sync({ alter: true });
 
 app.use(compression());
 app.use(cors());

@@ -30,7 +30,13 @@ export async function cleanUpMockData(type: string): Promise<void> {
   await Classes.destroy({
     where: { classCode: data.validMultiple.class.classCode },
   });
+  await Classes.destroy({
+    where: { classCode: data.validSingle3.class.classCode },
+  });
   await Subjects.destroy({
     where: { subjectCode: data.validMultiple.subject.subjectCode },
+  });
+  await Subjects.destroy({
+    where: { subjectCode: data.validSingle2.subject.subjectCode },
   });
 }

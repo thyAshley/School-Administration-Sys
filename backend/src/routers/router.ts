@@ -1,11 +1,11 @@
-import express from "express";
+import { Router } from "express";
 
-import { Teachers, Students, Classes, Subjects } from "../models";
 import HealthcheckController from "../controllers/HealthcheckController";
 import { ValidateRegistrationInputMiddleware } from "../middleware/InputValidationMiddleware";
 import { RegistrationController } from "../controllers/RegistrationController";
+import { getReport } from "../controllers/ReportController";
 
-const router = express.Router();
+const router = Router();
 router.use("/", HealthcheckController);
 
 router.post(
@@ -13,5 +13,7 @@ router.post(
   ValidateRegistrationInputMiddleware,
   RegistrationController
 );
+
+router.get("/reports/workload", getReport);
 
 export default router;
