@@ -36,8 +36,6 @@ This is a challenge to design and develop the backend API for a school in order 
 
 ## Additional libraries
 
----
-
 - [Supertest](https://www.npmjs.com/package/supertest)
 
 - [ts-jest](https://www.npmjs.com/search?q=ts-jest)
@@ -47,8 +45,6 @@ This is a challenge to design and develop the backend API for a school in order 
 <br/>
 
 ## Testing setup
-
----
 
 Set up a test database in mySQL call test. This will be use to run our test cases. You can ignore this step if you do not plan to run the test cases
 
@@ -70,8 +66,6 @@ Expected Output
 
 ## Prerequisites
 
----
-
 - Node Version: v14.16.0
 - mySQL 8.0 or docker installed
 
@@ -85,11 +79,9 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
 
 ## Installation
 
----
-
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/thyAshley/School-Administration-Sys.git
    ```
 2. Install NPM packages
    ```sh
@@ -108,8 +100,6 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
 </p>
 
 ## Folder Structure
-
----
 
     backend
     ├── database
@@ -130,8 +120,6 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
         ├── server.ts           # starter / initialization file
 
 ## APIs
-
----
 
 ### Create classes
 
@@ -204,14 +192,40 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
 3. After removing the teacher/student from the class, we still keep them in the
    database
 
-4. I have made both the teacher and student an optional array
-   teacher: Teacher[] | Teacher and student: Student[] | Student
+4. I have made both the teacher and student able to accept either an array of teacher or a single teacher to cater for the updating requirement. To add a new teacher to the class, the user would need to key in the existing teacher otherwise the existing teacher will be removed.
+
+```
+teacher: [{
+  name: Teacher 1,
+  email: teacher1@gmail.com
+}],
+student: [{
+  name: Student 1,
+  email: student1@gmail.com
+},{
+  name: Student 2,
+  email: student2@gmail.com
+}]
+
+or
+
+teacher: {
+  name: Teacher 1,
+  email: teacher1@gmail.com
+},
+student: {
+  name: Student 1,
+  email: student1@gmail.com
+}
+```
 
 ### Report Generation API
 
 For the report generation api, looking at the requirement, there will likely be an issue when the teacher has the same name.
 
-1. we will just use the name as an unique identifier for now in order to match the test cases given. To make the result more uniquely identifible, we can always include the user of the teacher email with the name
+1. In order to match the test cases given. I will stick with treating the teacher name to be the identifier in the report.
+
+To make the result more uniquely identifible, we can always include the user of the teacher email with the name
 
 ---
 
