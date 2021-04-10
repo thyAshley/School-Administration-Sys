@@ -6,14 +6,23 @@
     </li>
     <li><a href="#additional-libraries">Additional Libraries</a></li>
     <li>
-      <a href="#additional-setup">Additional Setup</a>
+      <a href="#testing-setup">Testing Setups</a>
+    </li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#folder-structure">Folder Structure</a></li>
+    <li>
+    <a href="#apis">API end point</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li>
+          <a href="#create-classes">Create Classes</a>
+        </li>
+        <li>
+          <a href="#workload-report">Generate workload report</a>
+        </li>
       </ul>
     </li>
-    <li><a href="#apis">API end point</a></li>
-    3<li><a href="#assumptions">Assumption and Outstanding Issues</a></li>
+    <li><a href="#assumptions">Assumption and known Issues</a></li>
   </ol>
 </details>
 <br/>
@@ -37,7 +46,7 @@ This is a challenge to design and develop the backend API for a school in order 
 
 <br/>
 
-## Additional Setup for testing
+## Testing setup
 
 ---
 
@@ -98,7 +107,7 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
   <img  src="backend/images/initialSetup.PNG">
 </p>
 
-## Key Folder Structure
+## Folder Structure
 
 ---
 
@@ -164,7 +173,7 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
 
 ---
 
-### Generate workload report
+### Workload report
 
 - **URL** `/api/reports/workload`
 
