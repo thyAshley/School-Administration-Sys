@@ -5,11 +5,9 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li><a href="#additional-libraries">Additional Libraries</a></li>
-    <li>
-      <a href="#testing-setup">Testing Setups</a>
-    </li>
     <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#installation">Installation</a></li>
+    <li><a href="#installation">Installation</a></li>    
+    <li><a href="#testing-setup">Testing Setups</a></li>
     <li><a href="#folder-structure">Folder Structure</a></li>
     <li>
     <a href="#apis">API end point</a>
@@ -41,26 +39,6 @@ This is a challenge to design and develop the backend API for a school in order 
 - [ts-jest](https://www.npmjs.com/search?q=ts-jest)
 
 - [cross-env](https://www.npmjs.com/package/cross-env)
-
-<br/>
-
-## Testing setup
-
-Set up a test database in mySQL call test. This will be use to run our test cases. You can ignore this step if you do not plan to run the test cases
-
-<p align="center">
-  <img  src="backend/images/database.PNG">
-</p>
-
-Test Runner
-
-```sh
-npm run test
-```
-
-Expected Output
-
-![test cases](backend/images/testcases.PNG)
 
 <br/>
 
@@ -98,6 +76,27 @@ if you do not have docker or plan to run the setup on a local/hosted mysql datab
 <p align="center">
   <img  src="backend/images/initialSetup.PNG">
 </p>
+
+
+## Testing setup
+
+Set up a test database in mySQL call test. This will be use to run our test cases. You can ignore this step if you do not plan to run the test cases
+
+<p align="center">
+  <img  src="backend/images/database.PNG">
+</p>
+
+Test Runner
+
+```sh
+npm run test
+```
+
+Expected Output
+
+![test cases](backend/images/testcases.PNG)
+
+<br/>
 
 ## Folder Structure
 
